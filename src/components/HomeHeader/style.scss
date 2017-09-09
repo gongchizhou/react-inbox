@@ -1,0 +1,23 @@
+.header-wrap{
+    position: relative;
+    color: #fff;
+    background-color:#4AABF8;
+    h2 {
+        height: 44px;
+        line-height: 44px;
+        font-size: 17px;
+        text-align: center;
+    }
+    .header-left{
+        position: absolute;
+        top: 50%;
+        left: 15px;
+        margin-top: -2px;
+    }
+    .header-right{
+        position: absolute;
+        top: 50%;
+        right: 15px;
+        margin-top: 2px;
+    }
+}

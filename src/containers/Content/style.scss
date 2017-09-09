@@ -1,0 +1,80 @@
+.header-wrap{
+    position: relative;
+    color: #fff;
+    background-color:#4AABF8;
+    .header-left{
+        position: absolute;
+        top: 50%;
+        left: 15px;
+    }
+    .header-right{
+        position: absolute;
+        top: 50%;
+        right: 15px;
+    }
+}
+.content-bd{
+    margin-top: 20px;
+    padding: 0 15px;
+    .info{
+        overflow: hidden;
+        .avatar{
+            float: left;
+            width: 44px;
+            height: 44px;
+            background: #F5D977;
+            overflow: hidden;
+            border-radius: 50%;
+        }
+        .bio{
+            float: left;
+            margin-left: 20px;
+            div:first-child{
+                font-size: 16px;
+                line-height: 26px;
+                color: #4AABF8;
+            }
+            div:last-child{
+                font-size: 14px;
+                font-weight: lighter;
+                color: #A9B7C2;
+            }
+        }
+    }
+    .title{
+        padding: 30px 0;
+        font-size: 22px;
+        color: #314567;
+        border-bottom: 1px solid #E5E7E8;
+        h2{
+            font-weight: lighter;
+        }
+    }
+    .mail-body{
+        margin-top: 12px;
+        p{
+            font-size: 16px;
+            font-weight: lighter;
+            line-height: 30px;
+            color: #8E9CAE;
+        }
+    }
+}
+.tab-edit{
+    float: left;
+    width: 33.33%;
+    text-align: center;
+    i{
+        color: #cbcdd0;
+        line-height: 60px;
+    }
+}
+.i-delete:before{
+    content: '\e872';
+}
+.i-like:before{
+    content: '\e87d';
+}
+.i-reply:before{
+    content: '\e15e';
+}

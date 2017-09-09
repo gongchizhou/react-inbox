@@ -1,0 +1,45 @@
+#side-wrap{
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    ul.nav{
+        li{
+            color:#fff;
+            font-size:18px;
+            line-height: 54px;
+            padding-left: 48px;
+            &:hover{
+                background: rgba(255,255,255,.2);
+                box-shadow: inset 4px 0 0 0 #fff;
+            }
+        }
+    }
+    .user{
+        margin: 60px 20px 30px 40px;
+        overflow: hidden;
+        .avatar{
+            float: left;
+            width: 54px;
+            height: 54px;
+            margin-right: 20px;
+            background: #fff;
+            border-radius: 50%;
+        }
+        .bio{
+            float: left;
+            h5{
+                font-size: 18px;
+                font-weight: normal;
+                color: #fff;
+                line-height: 28px;
+            }
+            p{
+                font-size: 14px;
+                color: #fff;
+                opacity: .8;
+            }
+        }
+    }
+
+}

@@ -1,0 +1,12 @@
+.user-list{
+    a:nth-child(odd){
+        .avatar{
+            background-color: #B09AF4;
+        }
+    }
+    a:nth-child(even){
+        .avatar{
+            background-color: #F6DA77;
+        }
+    }
+}
