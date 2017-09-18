@@ -8,6 +8,7 @@ class Compose extends React.Component{
     constructor(props){
         super(props);
         this.state =  {
+            address:'',
             targetValue: '',
             subjectValue: '',
             contentValue: ''
@@ -71,7 +72,7 @@ class Compose extends React.Component{
                 </div>
                 <div className="form-area">
                     <div className="target">
-                        <input type="text" placeholder="To" autoFocus onChange={this.targetHandleChange.bind(this)}/>
+                        <input type="text" placeholder="To" defaultValue={this.props.match.params.address} autoFocus onChange={this.targetHandleChange.bind(this)}/>
                         <i className="material-icons i-add"></i>
                     </div>
                     <div>

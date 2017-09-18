@@ -23,6 +23,12 @@ router.get('/api/user', function (ctx,next) {
     ctx.body = userData;
 });
 
+const userDetail = require('./user/user.js');
+
+router.get('/api/user/detail', function (ctx,next) {
+    ctx.body = userDetail;
+});
+
 
 app.use(router.routes())
    .use(router.allowedMethods())

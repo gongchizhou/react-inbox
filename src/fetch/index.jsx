@@ -16,6 +16,11 @@ export function getUserData(){
     return res;
 }
 
+export function getUserDetail(){
+    const res = get('/api/user/detail');
+    return res;
+}
+
 function get(url){
     const res = fetch(url,{
         credentials:'include',

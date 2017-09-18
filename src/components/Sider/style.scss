@@ -23,7 +23,10 @@
             width: 54px;
             height: 54px;
             margin-right: 20px;
-            background: #fff;
+            background-image: url(../../assets/images/avatar.jpg);
+            background-size: cover;
+            background-position: center;
+            background-color: #fff;
             border-radius: 50%;
         }
         .bio{

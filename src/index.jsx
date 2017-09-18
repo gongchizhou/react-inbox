@@ -11,8 +11,8 @@ import Contact from './containers/Contact/index.jsx'
 import Content from './containers/Content/index.jsx'
 import UserDetail from './containers/UserDetail/index.jsx'
 
-import './assert/scss/font.scss'
-import './assert/scss/reset.scss'
+import './assets/scss/font.scss'
+import './assets/scss/reset.scss'
 
 const store = configureStore();
 
@@ -22,7 +22,7 @@ ReactDom.render(
 			<Switch>
 				<App>
 					<Route exact path='/' component={Home}/>
-					<Route path='/compose' component={Compose}/>
+					<Route path='/compose/:address?' component={Compose}/>
 					<Route path='/contact' component={Contact}/>
 					<Route path='/content/:id' component={Content}/>
 					<Route path='/userDetail/:id' component={UserDetail}/>	
