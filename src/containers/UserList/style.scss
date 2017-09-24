@@ -10,3 +10,10 @@
         }
     }
 }
+.empty{
+    display: flex;
+    height: calc(100vh - 64px);
+    height: -webkit-calc(100vh - 64px);
+    justify-content: center;
+    align-items: center;
+}

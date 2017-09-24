@@ -28,7 +28,6 @@
         }
         .target{
             position: relative;
-            margin-bottom: 20px;
             .i-add{
                 position: absolute;
                 top: 25%;
@@ -38,10 +37,33 @@
                 &:before{
                     content: '\e145';
                 }
+                transition: all .3s ease-in-out;
+                -webkit-transition: all .3s ease-in-out;
+                -moz-transition: all .3s ease-in-out;
             }
+            .rotate{
+                transform: rotate(135deg);
+                -webkit-transform: rotate(135deg);
+                -moz-transform: rotate(135deg);
+            }
+        }
+        .slidup{
+            max-height: 0;
+            overflow: hidden;
+            transition: all .3s ease-in-out;
+            -webkit-transition: all .3s ease-in-out;
+            -moz-transition: all .3s ease-in-out;
+        }
+        .sliddown{
+            max-height: 400px;
+            overflow-y: scroll;
+            transition: all .3s ease-in-out;
+            -webkit-transition: all .3s ease-in-out;
+            -moz-transition: all .3s ease-in-out;
         }
         .subject{
             position: relative;
+            margin-top: 20px;
             &:after{
                 content: '';
                 position: absolute;

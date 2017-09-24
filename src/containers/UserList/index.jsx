@@ -1,34 +1,19 @@
 import React from 'react'
-import {connect} from 'react-redux'
 import UserComponent from '../../components/UserComponent/index.jsx'
 import { getUserData } from '../../fetch/index.jsx'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 
 import './style.scss'
 
 class UserList extends React.Component{
     constructor(props){
         super(props);
-        this.state={
-            user:[]
-        }
-    }
-
-    componentDidMount(){
-        const res = getUserData();
-        res.then((res) => {
-            return res.json();
-        }).then((json) => {
-            this.setState({
-                user: json.item
-            })
-        }).catch((ex) => {
-            console.log(ex)
-        })
     }
 
     render(){
         let rows = [];
-        this.state.user.forEach(function(item){
+        this.props.userData.forEach(function(item){
             rows.push(item.name.substring(0,1).toUpperCase());
         })
         rows = rows.filter(function(el,index,self){
@@ -37,8 +22,9 @@ class UserList extends React.Component{
         return(
             <div className="user-list">
                 {
-                    rows.map(function(rowsItem,index){
-                        return <UserComponent key={index} rowsItem={rowsItem} user={this.state.user}/>
+                    rows.length == 0?<div className="empty">nothing here</div>
+                    :rows.map(function(rowsItem,index){
+                        return <UserComponent key={index} rowsItem={rowsItem} user={this.props.userData} readOnly={this.props.readOnly} setAddress={this.props.setAddress}/>
                     }.bind(this))
                 }
             </div>
@@ -48,13 +34,12 @@ class UserList extends React.Component{
 
 function mapStateToProps(state){
     return{
-        mailReducer: state.mailReducer
+        userData: state.userData
     }
 }
 
 function mapDispatchToProps(dispatch){
     return{
-        
     }
 }
 

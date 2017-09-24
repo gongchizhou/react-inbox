@@ -1,0 +1,4 @@
+export const INIT_USERDATA = 'INIT_USERDATA'
+export const ADD_USERDATA = 'ADD_USERDATA'
+export const UPDATE_USERDATA = 'UPDATE_USERDATA'
+export const RM_USERDATA = 'RM_USERDATA'

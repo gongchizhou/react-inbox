@@ -1,6 +1,8 @@
 import React from 'react'
-import Header from '../../components/Header/index.jsx'
-import BackBtn from '../../components/Header/Back/index.jsx'
+import Header from '../../components/Header'
+import BackBtn from '../../components/Header/Back'
+import UserList from '../UserList'
+import {Link} from 'react-router-dom'
 
 import './style.scss'
 
@@ -11,7 +13,18 @@ class Compose extends React.Component{
             address:'',
             targetValue: '',
             subjectValue: '',
-            contentValue: ''
+            contentValue: '',
+            showList: false
+        }
+    }
+
+    componentDidMount(){
+        const addParams = this.props.match.params.address;
+        if(addParams !== null && addParams !== undefined){
+            const address = addParams.replace('$','.');
+            this.setState({
+            targetValue: address
+            })
         }
     }
 
@@ -62,6 +75,19 @@ class Compose extends React.Component{
         return this.state.contentValue;
     }
 
+    setAddress(address){
+        this.setState({
+            targetValue: address,
+            showList: !this.state.showList
+        })
+    }
+
+    toggleUserList(){
+        this.setState({
+            showList: !this.state.showList
+        })
+    }
+
     render(){
         return(
             <div className="compose-wrap">
@@ -72,9 +98,10 @@ class Compose extends React.Component{
                 </div>
                 <div className="form-area">
                     <div className="target">
-                        <input type="text" placeholder="To" defaultValue={this.props.match.params.address} autoFocus onChange={this.targetHandleChange.bind(this)}/>
-                        <i className="material-icons i-add"></i>
+                        <input type="text" placeholder="To" autoFocus value={this.state.targetValue} onChange={this.targetHandleChange.bind(this)}/>
+                        <i className={`material-icons i-add ${this.state.showList?'rotate':''}`} onClick={this.toggleUserList.bind(this)}></i>
                     </div>
+                    <div className={this.state.showList?'sliddown':'slidup'}><UserList readOnly='readOnly' setAddress={this.setAddress.bind(this)}/></div>
                     <div>
                         <div className="subject">
                             <input type="text" placeholder="Subject" onChange={this.subjectHandleChange.bind(this)}/>

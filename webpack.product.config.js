@@ -25,7 +25,8 @@ module.exports = {
 
 	output:{
         path: path.resolve(__dirname, './dist'),
-        filename: '[name].[chunkhash:8].js'
+		filename: '[name].[chunkhash:8].js',
+		publicPath: '/'
 	},
 
     resolve:{
@@ -91,7 +92,7 @@ module.exports = {
     plugins: [
         //new webpack.HotModuleReplacementPlugin(),
         new HtmlWebpackPlugin({
-        	template: path.resolve(__dirname, './index.tmpl.html')
+			template: path.resolve(__dirname, './index.tmpl.html')
         }),
 
         new webpack.optimize.UglifyJsPlugin({minimize: true}),
