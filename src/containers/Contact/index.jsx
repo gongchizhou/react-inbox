@@ -13,7 +13,7 @@ class Contact extends React.Component{
     }
     render(){
         return(
-            <div id="contact">
+            <div id="contact" className="wrap">
                 <div className="header-wrap">
                     <div className="header-left"><BackBtn/></div>
                     <Header/>

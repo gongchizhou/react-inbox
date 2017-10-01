@@ -6,3 +6,10 @@ export function initMailData(data){
         data
     }
 } 
+
+export function update(id){
+    return{
+        type: actionType.UPDATE_MAILDATA,
+        data: id
+    }
+} 

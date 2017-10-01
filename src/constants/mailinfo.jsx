@@ -1,2 +1,2 @@
 export const INIT_MAILDATA = 'INIT_MAILDATA'
-export const SET_MENU_STATE = 'SET_MENU_STATE'
+export const UPDATE_MAILDATA = 'UPDATE_MAILDATA'

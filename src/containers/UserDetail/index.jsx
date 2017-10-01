@@ -120,7 +120,7 @@ class UserDetail extends React.Component{
 
     render(){
         return(
-            <div id="userDetail">
+            <div id="userDetail" className="wrap">
                 <div className="header-wrap">
                     <div className="header-left"><BackBtn/></div>
                     <Header/>

@@ -1,10 +1,10 @@
 import React from 'react'
-import Header from '../Header/index.jsx'
-import MenuBtn from './MenuBtn/index.jsx'
+import Header from '../Header'
+import MenuBtn from './MenuBtn'
 import { Link } from 'react-router-dom'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import * as mailActionCreator from '../../actions/mailAction.jsx'
+import * as mailActionCreator from '../../actions/mailAction'
 
 import './style.scss'
 

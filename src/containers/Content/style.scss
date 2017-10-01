@@ -1,5 +1,4 @@
 .header-wrap{
-    position: relative;
     color: #fff;
     background-color:#4AABF8;
     .header-left{
@@ -14,7 +13,7 @@
     }
 }
 .content-bd{
-    margin-top: 20px;
+    margin-top: 84px;
     padding: 0 15px;
     .info{
         overflow: hidden;
@@ -74,6 +73,9 @@
 }
 .i-like:before{
     content: '\e87d';
+}
+.islike{
+    color: #F552A7!important;
 }
 .i-reply:before{
     content: '\e15e';

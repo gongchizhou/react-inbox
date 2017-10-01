@@ -40,16 +40,20 @@ class Home extends React.Component{
 
     render(){
         return(
-            <div id="home">
+            <div id="home" className="wrap">
                 <div id="main-wrap" className={this.state.showNav?'open':''}>
                     <div className="scroll-wrap" onScroll={this.scrollHandle.bind(this)}>
                         <HomeHeader showNav={this.showNav.bind(this)}/>
-                        <MailList setScrollFn={this.setScrollFn.bind(this)}/>  
+                        {
+                            this.props.match.path === '/liked'?
+                            <MailList mailList={this.props.mailData.filter((item) =>  item.isLike === true )}/>
+                            :<MailList mailList={this.props.mailData} setScrollFn={this.setScrollFn.bind(this)}/>  
+                        }
                     </div>
                     <ComposeBtn/>
                     { this.state.showNav?<div className="mask" onClick={this.hideNav.bind(this)}></div>: ''}
                 </div>
-                <Sider/>
+                <Sider hideNav={this.hideNav.bind(this)}/>
             </div>
         )
     }
@@ -57,7 +61,7 @@ class Home extends React.Component{
 
 function mapStateToProps(state){
     return{
-        mailReducer: state.mailReducer
+        mailData: state.mailData
     }
 }
 

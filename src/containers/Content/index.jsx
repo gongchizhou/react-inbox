@@ -3,6 +3,9 @@ import Header from '../../components/Header/index.jsx'
 import BackBtn from '../../components/Header/Back/index.jsx'
 import TabBar from './TabBar/index.jsx'
 import { getMailDetail } from '../../fetch/index.jsx'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import * as mailActionCreator from '../../actions/mailAction'
 
 import './style.scss'
 
@@ -16,23 +19,27 @@ class Content extends React.Component{
 
     componentDidMount(){
         const id = this.props.match.params.id;
-        const res = getMailDetail(id);
-        res.then(res => {
-            return res.json()
-        }).then(json => {
-            let data = json.item;
-            data = data.filter(function(el){
-                return el.id == id;
-            })
-            this.setState({
-                detailItem: data[0]
-            })
+        let data = this.props.mailData;
+        data = data.filter(function(el){
+            return el.id == id;
         })
+        this.setState({
+            detailItem: data[0],
+            isLike: data[0].isLike
+        })
+    }
+
+    toggleLike(){
+        const id = Number(this.props.match.params.id);
+        this.setState({
+            isLike: !this.state.isLike
+        })
+        this.props.mailAction.update(id);
     }
 
     render(){
         return(
-            <div id="content">
+            <div id="content" className="wrap">
                 <div className="header-wrap">
                     <div className="header-left"><BackBtn/></div>
                     <Header/>
@@ -56,7 +63,7 @@ class Content extends React.Component{
                 </div>
                 <TabBar>   
                     <div className="tab-edit"><i className="material-icons i-reply"></i></div>
-                    <div className="tab-edit"><i className="material-icons i-like"></i></div>
+                    <div className="tab-edit" onClick={this.toggleLike.bind(this)}><i className={`material-icons i-like ${this.state.isLike?'islike':''}`}></i></div>
                     <div className="tab-edit"><i className="material-icons i-delete"></i></div>
                 </TabBar>
             </div>
@@ -64,4 +71,17 @@ class Content extends React.Component{
     }
 }
 
-export default Content
+function mapStateToProps(state){
+    return{
+        mailData: state.mailData
+    }
+}
+
+function mapDispatchToProps(dispatch){
+    return{
+        mailAction: bindActionCreators(mailActionCreator,dispatch)
+    }
+}
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(Content)

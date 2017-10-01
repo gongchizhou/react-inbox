@@ -1,7 +1,11 @@
 .header-wrap{
-    position: relative;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
     color: #fff;
     background-color:#4AABF8;
+    z-index: 1000;
     h2 {
         height: 44px;
         line-height: 44px;

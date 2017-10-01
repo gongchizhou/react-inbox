@@ -1,21 +1,20 @@
 import React from 'react'
-import MailItem from './MailItem.jsx'
-import LoadMore from '../LoadMore/index.jsx'
-import { getMailData } from '../../fetch/index.jsx'
+import MailItem from './MailItem'
+import LoadMore from '../LoadMore'
+import { getMailData } from '../../fetch'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import * as mailActionCreator from '../../actions/mailAction'
+
 import './list.scss'
 
 class MailList extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            hasMore:false,
-            loadingMore:false,
-            mail:[]
+            hasMore:true,
+            loadingMore:false
         }
-    }
-
-    componentDidMount(){
-        this.loadMoreData();
     }
 
     loadMoreData(){
@@ -31,10 +30,9 @@ class MailList extends React.Component{
             if(data.length){
                 this.setState({
                     hasMore: hasMore,
-                    loadingMore: false,
-                    mail: this.state.mail.concat(data)
+                    loadingMore: false
                 });
-                
+                this.props.mailAction.initMailData(data)
             }
         }).catch(ex => {
             console.log('error')
@@ -45,17 +43,31 @@ class MailList extends React.Component{
         return(
             <div className="mail-list">
                 {
-                    this.state.mail.map(function(item,index){
+                    this.props.mailList.length > 0?
+                    this.props.mailList.map(function(item,index){
                         return <MailItem key={index} item={item}/>
                     })
+                    :<div className="empty"><span>no more info</span></div>
                 }
                 {
-                    this.state.hasMore?<LoadMore loadingMore={this.state.loadingMore} loadMoreFn={this.loadMoreData.bind(this)} setScrollFn={this.props.setScrollFn}/>:''
+                    this.state.hasMore && this.props.setScrollFn?
+                    <LoadMore loadingMore={this.state.loadingMore} loadMoreFn={this.loadMoreData.bind(this)} setScrollFn={this.props.setScrollFn}/>:''
                 }
             </div>
         )
     }
 }
 
+function mapStateToProps(state){
+    return{
+    }
+}
 
-export default MailList
+function mapDispatchToProps(dispatch){
+    return{
+        mailAction: bindActionCreators(mailActionCreator,dispatch)
+    }
+}
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(MailList)

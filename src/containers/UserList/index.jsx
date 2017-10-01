@@ -20,7 +20,7 @@ class UserList extends React.Component{
             return self.indexOf(el) === index
         })
         return(
-            <div className="user-list">
+            <div className="user-list wrap">
                 {
                     rows.length == 0?<div className="empty">nothing here</div>
                     :rows.map(function(rowsItem,index){
