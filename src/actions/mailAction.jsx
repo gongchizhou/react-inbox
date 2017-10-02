@@ -13,3 +13,24 @@ export function update(id){
         data: id
     }
 } 
+
+export function remove(item){
+    return{
+        type: actionType.RM_MAILDATA,
+        data: item
+    }
+} 
+
+export function addSend(item){
+    return{
+        type: actionType.ADD_SENDDATA,
+        data: item
+    }
+} 
+
+export function addTrash(item){
+    return{
+        type: actionType.ADD_TRASHDATA,
+        data: item
+    }
+} 

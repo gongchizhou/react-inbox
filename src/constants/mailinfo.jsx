@@ -1,2 +1,5 @@
 export const INIT_MAILDATA = 'INIT_MAILDATA'
 export const UPDATE_MAILDATA = 'UPDATE_MAILDATA'
+export const RM_MAILDATA = 'RM_MAILDATA'
+export const ADD_SENDDATA = 'ADD_SENDDATA'
+export const ADD_TRASHDATA = 'ADD_TRASHDATA'

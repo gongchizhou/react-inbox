@@ -3,6 +3,9 @@ import Header from '../../components/Header'
 import BackBtn from '../../components/Header/Back'
 import UserList from '../UserList'
 import {Link} from 'react-router-dom'
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
+import * as sendActionCreator from '../../actions/mailAction'
 
 import './style.scss'
 
@@ -14,7 +17,8 @@ class Compose extends React.Component{
             targetValue: '',
             subjectValue: '',
             contentValue: '',
-            showList: false
+            showList: false,
+            isBtnLoading: false
         }
     }
 
@@ -23,7 +27,7 @@ class Compose extends React.Component{
         if(addParams !== null && addParams !== undefined){
             const address = addParams.replace('$','.');
             this.setState({
-            targetValue: address
+                targetValue: address
             })
         }
     }
@@ -59,6 +63,26 @@ class Compose extends React.Component{
             console.log("Cempty")
             return;
         }
+        this.setState({
+            isBtnLoading: true
+        })
+        const time = this.getNowTime();
+        const item = {
+            id: 1 + this.props.sendData.length,
+            address: this.state.targetValue,
+            title: this.state.subjectValue,
+            author: "me",
+            time: time,
+            imgUrl: "https://unsplash.it/200/300/?random",
+            content: this.state.contentValue
+        }
+        
+        setTimeout(function(){
+            this.props.sendAction.addSend(item);
+            this.setState({
+                isBtnLoading: false
+            })
+        }.bind(this),1500)
     }
 
     validateMail(){
@@ -88,13 +112,28 @@ class Compose extends React.Component{
         })
     }
 
+    getNowTime(){
+        const date = new Date();
+        const year = date.getFullYear();
+        let month = date.getMonth()+1;
+              month = month<9 ? '0'+month : month;
+        let day = date.getDay()+1;
+              day = day<9 ? '0'+day : day;
+        const hour =date.getHours();
+        const minute = date.getMinutes();
+        return `${year}-${month}-${day} ${hour}:${minute}`
+    }
+
     render(){
         return(
             <div className="compose-wrap">
                 <div className="header-wrap">
                     <div className="header-left"><BackBtn/></div>
                     <Header/>
-                    <div className="header-right" onClick={this.sendMail.bind(this)}>send</div>
+                    {
+                        this.state.isBtnLoading?<div className="header-right">loading...</div>:
+                        <div className="header-right" onClick={this.sendMail.bind(this)}>send</div>
+                    }
                 </div>
                 <div className="form-area">
                     <div className="target">
@@ -116,4 +155,17 @@ class Compose extends React.Component{
     }
 }
 
-export default Compose
+function mapStateToProps(state){
+    return{
+        sendData: state.sendData
+    }
+}
+
+function mapDispatchToProps(dispatch){
+    return{
+        sendAction: bindActionCreators(sendActionCreator,dispatch)
+    }
+}
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(Compose)

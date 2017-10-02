@@ -1,8 +1,9 @@
 import React from 'react'
-import Header from '../../components/Header/index.jsx'
-import BackBtn from '../../components/Header/Back/index.jsx'
-import TabBar from './TabBar/index.jsx'
-import { getMailDetail } from '../../fetch/index.jsx'
+import Header from '../../components/Header'
+import BackBtn from '../../components/Header/Back'
+import TabBar from './TabBar'
+import { getMailDetail } from '../../fetch'
+import {Link} from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as mailActionCreator from '../../actions/mailAction'
@@ -37,6 +38,21 @@ class Content extends React.Component{
         this.props.mailAction.update(id);
     }
 
+    delete(){
+        const item = {
+            id: 1 + this.props.trashData.length,
+            address: this.state.detailItem.address,
+            title: this.state.detailItem.title,
+            author: this.state.detailItem.author,
+            time: this.state.detailItem.time,
+            imgUrl: this.state.detailItem.imgUrl,
+            content: this.state.detailItem.content
+        }
+        this.props.mailAction.remove(this.state.detailItem);
+        this.props.mailAction.addTrash(item);
+        window.history.back();
+    }
+
     render(){
         return(
             <div id="content" className="wrap">
@@ -51,7 +67,7 @@ class Content extends React.Component{
                         </div>
                         <div className="bio">
                             <div>{ this.state.detailItem.author }</div>
-                            <div>Anthen@zimail.com on { this.state.detailItem.time }</div>
+                            <div>{ this.state.detailItem.address} on { this.state.detailItem.time }</div>
                         </div>
                     </div>
                     <div className="title">
@@ -62,9 +78,9 @@ class Content extends React.Component{
                     </div>
                 </div>
                 <TabBar>   
-                    <div className="tab-edit"><i className="material-icons i-reply"></i></div>
+                    <div className="tab-edit"><Link to={`/compose/${this.state.detailItem.address}`}><i className="material-icons i-reply"></i></Link></div>
                     <div className="tab-edit" onClick={this.toggleLike.bind(this)}><i className={`material-icons i-like ${this.state.isLike?'islike':''}`}></i></div>
-                    <div className="tab-edit"><i className="material-icons i-delete"></i></div>
+                    <div className="tab-edit" onClick={this.delete.bind(this)}><i className="material-icons i-delete"></i></div>
                 </TabBar>
             </div>
         )
@@ -73,7 +89,8 @@ class Content extends React.Component{
 
 function mapStateToProps(state){
     return{
-        mailData: state.mailData
+        mailData: state.mailData,
+        trashData: state.trashData
     }
 }
 
