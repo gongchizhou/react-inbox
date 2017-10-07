@@ -73,6 +73,7 @@ class Compose extends React.Component{
             title: this.state.subjectValue,
             author: "me",
             time: time,
+            isLike: false,
             imgUrl: "https://unsplash.it/200/300/?random",
             content: this.state.contentValue
         }
@@ -82,7 +83,7 @@ class Compose extends React.Component{
             this.setState({
                 isBtnLoading: false
             })
-        }.bind(this),1500)
+        }.bind(this),800)
     }
 
     validateMail(){
@@ -116,11 +117,13 @@ class Compose extends React.Component{
         const date = new Date();
         const year = date.getFullYear();
         let month = date.getMonth()+1;
-              month = month<9 ? '0'+month : month;
+            month = month<9 ? '0'+month : month;
         let day = date.getDay()+1;
-              day = day<9 ? '0'+day : day;
-        const hour =date.getHours();
-        const minute = date.getMinutes();
+            day = day<9 ? '0'+day : day;
+        let hour =date.getHours();
+            hour = hour<10 ? '0'+hour : hour;
+        let minute = date.getMinutes();
+            minute = minute<10 ? '0'+minute : minute;
         return `${year}-${month}-${day} ${hour}:${minute}`
     }
 
@@ -131,7 +134,7 @@ class Compose extends React.Component{
                     <div className="header-left"><BackBtn/></div>
                     <Header/>
                     {
-                        this.state.isBtnLoading?<div className="header-right">loading...</div>:
+                        this.state.isBtnLoading?<div className="header-right send-loading"></div>:
                         <div className="header-right" onClick={this.sendMail.bind(this)}>send</div>
                     }
                 </div>

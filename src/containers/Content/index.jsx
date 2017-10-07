@@ -20,7 +20,14 @@ class Content extends React.Component{
 
     componentDidMount(){
         const id = this.props.match.params.id;
-        let data = this.props.mailData;
+        let data;
+        if(this.props.location.state === 'sent'){
+            data = this.props.sendData;
+        }else if(this.props.location.state === 'trash'){
+            data = this.props.trashData;
+        }else{
+            data = this.props.mailData;
+        }
         data = data.filter(function(el){
             return el.id == id;
         })
@@ -46,7 +53,8 @@ class Content extends React.Component{
             author: this.state.detailItem.author,
             time: this.state.detailItem.time,
             imgUrl: this.state.detailItem.imgUrl,
-            content: this.state.detailItem.content
+            content: this.state.detailItem.content,
+            isLike: false
         }
         this.props.mailAction.remove(this.state.detailItem);
         this.props.mailAction.addTrash(item);
@@ -77,11 +85,15 @@ class Content extends React.Component{
                         <p>{ this.state.detailItem.content }</p>
                     </div>
                 </div>
-                <TabBar>   
-                    <div className="tab-edit"><Link to={`/compose/${this.state.detailItem.address}`}><i className="material-icons i-reply"></i></Link></div>
-                    <div className="tab-edit" onClick={this.toggleLike.bind(this)}><i className={`material-icons i-like ${this.state.isLike?'islike':''}`}></i></div>
-                    <div className="tab-edit" onClick={this.delete.bind(this)}><i className="material-icons i-delete"></i></div>
-                </TabBar>
+                {
+                    this.props.location.state === '' || this.props.location.state === 'liked'?
+                    <TabBar>   
+                        <div className="tab-edit"><Link to={`/compose/${this.state.detailItem.address}`}><i className="material-icons i-reply"></i></Link></div>
+                        <div className="tab-edit" onClick={this.toggleLike.bind(this)}><i className={`material-icons i-like ${this.state.isLike?'islike':''}`}></i></div>
+                        <div className="tab-edit" onClick={this.delete.bind(this)}><i className="material-icons i-delete"></i></div>
+                    </TabBar>:''
+                }
+
             </div>
         )
     }
@@ -90,6 +102,7 @@ class Content extends React.Component{
 function mapStateToProps(state){
     return{
         mailData: state.mailData,
+        sendData: state.sendData,
         trashData: state.trashData
     }
 }

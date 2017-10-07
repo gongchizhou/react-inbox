@@ -1,6 +1,6 @@
 import React from 'react'
 import MailItem from './MailItem'
-import LoadMore from '../LoadMore'
+import LoadMore from '../../components/LoadMore'
 import { getMailData } from '../../fetch'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -45,9 +45,9 @@ class MailList extends React.Component{
                 {
                     this.props.mailList.length > 0?
                     this.props.mailList.map(function(item,index){
-                        return <MailItem key={index} item={item}/>
-                    })
-                    :<div className="empty"><span>no more info</span></div>
+                        return <MailItem key={index} item={item} canEdit={this.props.canEdit} state={this.props.state.slice(1)}/>
+                    }.bind(this))
+                    :<div className="empty"><span>you don't have any email yet</span></div>
                 }
                 {
                     this.state.hasMore && this.props.setScrollFn?

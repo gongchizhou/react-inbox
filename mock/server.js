@@ -11,7 +11,7 @@ router.get('/api/mail', function (ctx,next) {
     ctx.body = mailData;
 });
 
-const mailDetail = require('./mail/detail.js');
+const mailDetail = require('./mail/mail.js');
 
 router.get('/api/mail/detail', function (ctx,next) {
     ctx.body = mailDetail;

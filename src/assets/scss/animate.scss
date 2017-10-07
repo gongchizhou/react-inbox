@@ -19,6 +19,26 @@
         border-left-color: #4aabf8;
     }
 }
+.send-loading{
+    position: relative;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,.2);
+    animation: spin 1s infinite linear;
+    &:before{
+        content: '';
+        display: block;
+        position: absolute;
+        left: -2px;
+        top: -2px;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        border: 2px solid #B0DBFF;
+        border-left-color: #fff;
+    }
+}
 @keyframes spin{
   100%{
   transform: rotate(360deg)

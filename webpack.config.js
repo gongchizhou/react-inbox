@@ -5,11 +5,11 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
 	entry: [
-		path.resolve(__dirname, './src/index.jsx')
+		path.resolve(__dirname, 'src/index.jsx')
 	],
 
 	output:{
-        path: path.resolve(__dirname, './dist'),
+        path: __dirname + '/dist',
 		filename: 'bundle.js',
 		publicPath: '/'
 	},
@@ -19,7 +19,7 @@ module.exports = {
     },
 
 	module:{
-		loaders:[
+		rules:[
 			{
 				test: /\.js|jsx$/, 
 				loaders: 'babel-loader',

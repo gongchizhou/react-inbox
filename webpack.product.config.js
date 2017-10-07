@@ -3,14 +3,9 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-const extractSass = new ExtractTextPlugin({
-    filename: "[name].[chunkhash:8].css",
-    disable: process.env.NODE_ENV === "development"
-});
-
 module.exports = {
 	entry: {
-		bundle: path.resolve(__dirname, './src/index.jsx'),
+		bundle: path.resolve(__dirname, 'src/index.jsx'),
 		lib: [
 	      'react', 
 	      'react-dom', 
@@ -24,9 +19,9 @@ module.exports = {
 	},
 
 	output:{
-        path: path.resolve(__dirname, './dist'),
+        path: __dirname + '/dist',
 		filename: '[name].[chunkhash:8].js',
-		publicPath: '/'
+		publicPath: ''
 	},
 
     resolve:{
@@ -34,7 +29,7 @@ module.exports = {
     },
 
 	module:{
-		loaders:[
+		rules:[
 			{
 				test: /\.js|jsx$/, 
 				loaders: 'babel-loader',
@@ -52,7 +47,7 @@ module.exports = {
 			},
 			{
 				test: /\.scss/,
-				use: extractSass.extract({
+				use: ExtractTextPlugin.extract({
 					use: [{
 						loader: "css-loader"
 					}, {
@@ -67,7 +62,8 @@ module.exports = {
 				use:[
 						{loader: 'url-loader',
 						options:{
-							limit: 8192
+							limit: 8192,
+							outputPath: 'images/'
 						}
 					}
 				]
@@ -82,6 +78,7 @@ module.exports = {
 				use:[
 						{loader: 'file-loader',
 						options:{
+							outputPath: 'fonts/'
 						}
 					}
 				]
@@ -103,7 +100,7 @@ module.exports = {
 		      }
         }), // 定义为生产环境
             
-		new ExtractTextPlugin('[name].[chunkhash:8].css'), // 分离CSS和JS文件
+		new ExtractTextPlugin('styles.[chunkhash:8].css'), // 分离CSS和JS文件
 
 		// 提供公共代码
 		new webpack.optimize.CommonsChunkPlugin({

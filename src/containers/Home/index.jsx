@@ -1,9 +1,9 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import MailList from '../../components/MailList/MailList.jsx'
-import HomeHeader from '../../components/HomeHeader/index.jsx'
-import Sider from '../../components/Sider/index.jsx'
-import ComposeBtn from '../../components/ComposeBtn/index.jsx'
+import MailList from '../MailList'
+import HomeHeader from '../../components/HomeHeader'
+import Sider from '../../components/Sider'
+import ComposeBtn from '../../components/ComposeBtn'
 
 import './style.scss'
 
@@ -46,8 +46,12 @@ class Home extends React.Component{
                         <HomeHeader showNav={this.showNav.bind(this)}/>
                         {
                             this.props.match.path === '/liked'?
-                            <MailList mailList={this.props.mailData.filter((item) =>  item.isLike === true )}/>
-                            :<MailList mailList={this.props.mailData} setScrollFn={this.setScrollFn.bind(this)}/>  
+                            <MailList mailList={this.props.mailData.filter((item) =>  item.isLike === true )} state={this.props.match.path}/>
+                            : this.props.match.path === '/sent'?
+                            <MailList mailList={this.props.sendData} canEdit={false} state={this.props.match.path}/>
+                            :this.props.match.path === '/trash'?
+                            <MailList mailList={this.props.trashData} canEdit={false} state={this.props.match.path}/>
+                            :<MailList mailList={this.props.mailData} setScrollFn={this.setScrollFn.bind(this)} state={this.props.match.path}/>
                         }
                     </div>
                     <ComposeBtn/>
@@ -61,7 +65,9 @@ class Home extends React.Component{
 
 function mapStateToProps(state){
     return{
-        mailData: state.mailData
+        mailData: state.mailData,
+        sendData: state.sendData,
+        trashData: state.trashData
     }
 }
 
