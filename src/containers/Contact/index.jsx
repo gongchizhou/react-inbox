@@ -21,7 +21,7 @@ class Contact extends React.Component{
                     :<Link to='/addUser' className="header-right">add</Link>
                     }
                 </div>
-                <UserList/>
+                <div className="list-wrap"><UserList/></div>
             </div>
         )
     }

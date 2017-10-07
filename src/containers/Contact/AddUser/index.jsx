@@ -1,7 +1,8 @@
 import React from 'react'
-import Header from '../../../components/Header/index.jsx'
-import BackBtn from '../../../components/Header/Back/index.jsx'
-import { getUserDetail } from '../../../fetch/index.jsx'
+import Header from '../../../components/Header'
+import BackBtn from '../../../components/Header/Back'
+import Notify from '../../../components/Notify'
+import { getUserDetail } from '../../../fetch'
 import { Link } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -15,7 +16,10 @@ class AddUser extends React.Component{
             nameValue: '',
             mailValue: '',
             mobileValue: '',
-            phoneValue: ''
+            phoneValue: '',
+            showNotify: false,
+            showFail: false,
+            msg: ''
         }
     }
 
@@ -23,14 +27,20 @@ class AddUser extends React.Component{
 
     doneClick(){
         if(!this.validateName()){
-            console.log('name must begin with a letter')
+            this.asset('name must begin with a letter',true)
             return
         }
 
         if(!this.validateMail()){
-            console.log('wrong mail format')
+            this.asset('wrong mail format',true)
             return
         }
+
+        if(!this.validateNum()){
+            this.asset('phone must be numbers',true)
+            return
+        }
+
         let name = this.state.nameValue,
             email = this.state.mailValue,
             mobile = this.state.mobileValue,
@@ -86,6 +96,36 @@ class AddUser extends React.Component{
         return reg.test(value);
     }
 
+    validateNum(){
+        let value1 = this.state.mobileValue;
+        let value2 = this.state.phoneValue;
+        const reg = /^[0-9]+/;
+        return reg.test(value1) && reg.test(value2);
+    }
+
+    asset(msg,fail){
+        this.setState({
+            showNotify: true,
+            msg: msg
+        })
+
+        if(fail){
+            this.setState({
+                showFail: true
+            })
+        }else{
+            this.setState({
+                showFail: false
+            })          
+        }
+
+        setTimeout(function(){
+            this.setState({
+                showNotify: false
+            })
+        }.bind(this),800)
+    }
+
     render(){
         return(
             <div id="userDetail">
@@ -95,11 +135,12 @@ class AddUser extends React.Component{
                     <div className="header-right" onClick={this.doneClick.bind(this)}>Done</div>
                 </div>
                 <div className="content-hd">
-                        <div className="avatar">
-                            <img src="https://unsplash.it/200/300/?random"/>
-                        </div>
-                        <input type="text" onChange={this.nameHandleChange.bind(this)} placeholder="name"/>
+                    <Notify showNotify={this.state.showNotify} showFail={this.state.showFail} msg={this.state.msg}/>
+                    <div className="avatar">
+                        <img src="https://unsplash.it/200/300/?random"/>
                     </div>
+                    <input type="text" onChange={this.nameHandleChange.bind(this)} placeholder="name"/>
+                </div>
                 <div className="content-bd">
                     <p className="email">
                         <i className="material-icons i-mail"></i>

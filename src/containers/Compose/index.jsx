@@ -1,6 +1,7 @@
 import React from 'react'
 import Header from '../../components/Header'
 import BackBtn from '../../components/Header/Back'
+import Notify from '../../components/Notify'
 import UserList from '../UserList'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
@@ -18,7 +19,10 @@ class Compose extends React.Component{
             subjectValue: '',
             contentValue: '',
             showList: false,
-            isBtnLoading: false
+            isBtnLoading: false,
+            showNotify: false,
+            showFail: false,
+            msg: ''
         }
     }
 
@@ -52,15 +56,15 @@ class Compose extends React.Component{
 
     sendMail(){
         if(!this.validateMail()){
-            console.log("error mail")
+            this.asset("wrong mail format",true)
             return;
         }
         if(!this.validateSubject()){
-            console.log("Sempty")
+            this.asset("subject can not be empty",true)
             return;
         }
         if(!this.validateContent()){
-            console.log("Cempty")
+            this.asset("content can not be empty",true)
             return;
         }
         this.setState({
@@ -83,6 +87,7 @@ class Compose extends React.Component{
             this.setState({
                 isBtnLoading: false
             })
+            this.asset("sent succeed",false)
         }.bind(this),800)
     }
 
@@ -127,6 +132,29 @@ class Compose extends React.Component{
         return `${year}-${month}-${day} ${hour}:${minute}`
     }
 
+    asset(msg,fail){
+        this.setState({
+            showNotify: true,
+            msg: msg
+        })
+
+        if(fail){
+            this.setState({
+                showFail: true
+            })
+        }else{
+            this.setState({
+                showFail: false
+            })          
+        }
+
+        setTimeout(function(){
+            this.setState({
+                showNotify: false
+            })
+        }.bind(this),800)
+    }
+
     render(){
         return(
             <div className="compose-wrap">
@@ -139,6 +167,7 @@ class Compose extends React.Component{
                     }
                 </div>
                 <div className="form-area">
+                    <Notify showNotify={this.state.showNotify} showFail={this.state.showFail} msg={this.state.msg}/>
                     <div className="target">
                         <input type="text" placeholder="To" autoFocus value={this.state.targetValue} onChange={this.targetHandleChange.bind(this)}/>
                         <i className={`material-icons i-add ${this.state.showList?'rotate':''}`} onClick={this.toggleUserList.bind(this)}></i>

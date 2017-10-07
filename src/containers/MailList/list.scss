@@ -1,4 +1,7 @@
 .mail-list{
     position: relative;
     margin-top: 64px;
+    .mt0{
+        margin-top: -64px;
+    }
 }

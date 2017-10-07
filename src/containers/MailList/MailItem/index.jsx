@@ -9,13 +9,22 @@ class MailItem extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            isLike: this.props.item.isLike,
             isStart: false,
             toBound: false,
             start_x: null,
             x: null
         }
     }
+
+    componentDidMount(){
+        const id = this.props.item.id;
+        let data = this.props.mailData.filter(function(el){
+            return el.id == id;
+        })
+        this.setState({
+            isLike: data[0].isLike
+        })
+    } 
 
     onStart(e){
         this.setState({
@@ -91,6 +100,7 @@ class MailItem extends React.Component{
         }
         this.props.mailAction.remove(this.props.item);
         this.props.mailAction.addTrash(item);
+        this.props.asset("delete succeed",false)
         e.preventDefault();
     }
 
@@ -141,6 +151,7 @@ MailItem.defaultProps = {
 
 function mapStateToProps(state){
     return{
+        mailData: state.mailData,
         trashData: state.trashData
     }
 }
