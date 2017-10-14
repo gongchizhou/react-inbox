@@ -8,6 +8,9 @@
         line-height: 1.5;
         background: #fff;
         z-index: 100;
+        transition: all .3s linear;
+        -webkit-transition: all .3s linear;
+        -moz-transition: all .3s linear;
         div{
             .status{
                 float: left;

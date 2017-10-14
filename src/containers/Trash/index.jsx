@@ -5,14 +5,11 @@ import HomeHeader from '../../components/HomeHeader'
 import Sider from '../../components/Sider'
 import ComposeBtn from '../../components/ComposeBtn'
 
-import './style.scss'
-
-class Home extends React.Component{
+class Trash extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            showNav:false,
-            scroll:{}
+            showNav:false
         }
     }
 
@@ -28,27 +25,13 @@ class Home extends React.Component{
         })
     }
 
-    scrollHandle(){
-        this.state.scroll();
-    }
-
-    setScrollFn(fn){
-        this.setState({
-            scroll: fn
-        })
-    }
-
     render(){
         return(
             <div id="home" className="wrap">
                 <div id="main-wrap" className={this.state.showNav?'open':''}>
-                    <div className="scroll-wrap" onScroll={this.scrollHandle.bind(this)}>
+                    <div className="scroll-wrap">
                         <HomeHeader showNav={this.showNav.bind(this)}/>
-                        {
-                            this.props.match.path === '/liked'?
-                            <MailList mailList={this.props.mailData.filter((item) =>  item.isLike === true )} state={this.props.match.path}/>
-                            :<MailList mailList={this.props.mailData} setScrollFn={this.setScrollFn.bind(this)} state={this.props.match.path}/>
-                        }
+                            <MailList mailList={this.props.trashData} canEdit={false} state={this.props.match.path}/>
                     </div>
                     <ComposeBtn/>
                     { this.state.showNav?<div className="mask" onClick={this.hideNav.bind(this)}></div>: ''}
@@ -61,7 +44,7 @@ class Home extends React.Component{
 
 function mapStateToProps(state){
     return{
-        mailData: state.mailData
+        trashData: state.trashData
     }
 }
 
@@ -72,4 +55,4 @@ function mapDispatchToProps(dispatch){
 }
 
 
-export default connect(mapStateToProps,mapDispatchToProps)(Home)
+export default connect(mapStateToProps,mapDispatchToProps)(Trash)

@@ -21,11 +21,12 @@ export default function mailData(state = initiState,action){
             return state
 
         case actionType.RM_MAILDATA:
-            return state.filter(function(item){
-                if(item.id !== action.data.id){
-                    return item
+            state.forEach(function(item,index){
+                if(item.id === action.data.id){
+                    state.splice(index,1);
                 }
-            });      
+            });
+            return state     
 
         default:
             return state;

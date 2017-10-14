@@ -122,9 +122,9 @@ class Compose extends React.Component{
         const date = new Date();
         const year = date.getFullYear();
         let month = date.getMonth()+1;
-            month = month<9 ? '0'+month : month;
-        let day = date.getDay()+1;
-            day = day<9 ? '0'+day : day;
+            month = month<10 ? '0'+month : month;
+        let day = date.getDate();
+            day = day<10 ? '0'+day : day;
         let hour =date.getHours();
             hour = hour<10 ? '0'+hour : hour;
         let minute = date.getMinutes();

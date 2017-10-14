@@ -31,10 +31,13 @@ class Content extends React.Component{
         data = data.filter(function(el){
             return el.id == id;
         })
+        
+        const isLike = data[0].isLike ? data[0].isLike : false;
         this.setState({
             detailItem: data[0],
-            isLike: data[0].isLike
+            isLike: isLike
         })
+        
     }
 
     toggleLike(){
@@ -63,6 +66,7 @@ class Content extends React.Component{
 
     render(){
         return(
+            this.state.detailItem?
             <div id="content" className="wrap">
                 <div className="header-wrap">
                     <div className="header-left"><BackBtn/></div>
@@ -95,6 +99,7 @@ class Content extends React.Component{
                 }
 
             </div>
+            :<div className="empty mt0"><span>you don't have any email yet</span></div>
         )
     }
 }

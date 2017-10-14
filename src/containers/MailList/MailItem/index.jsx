@@ -17,20 +17,24 @@ class MailItem extends React.Component{
     }
 
     componentDidMount(){
-        const id = this.props.item.id;
-        let data = this.props.mailData.filter(function(el){
-            return el.id == id;
-        })
         this.setState({
-            isLike: data[0].isLike
+            isLike: this.props.item.isLike
         })
     } 
+
+    getAngle(x1,y1,x2,y2){
+        let dx = x2 - x1;
+        let dy = y2 - y1;
+        return Math.atan2(dy , dx) * 180 / Math.PI;
+    }
 
     onStart(e){
         this.setState({
             isStart: true,
             start_x: e.touches[0].pageX,
-            x: e.touches[0].pageX
+            start_y: e.touches[0].pageY,
+            x: e.touches[0].pageX,
+            y: e.touches[0].pageY
         })
        
     }
@@ -38,31 +42,35 @@ class MailItem extends React.Component{
     onMove(e){
         if(this.state.isStart){
             this.setState({
-                x: e.changedTouches[0].pageX
+                x: e.changedTouches[0].pageX,
+                y: e.changedTouches[0].pageY
             })
             let dist = this.state.start_x - this.state.x;
+            let angle = this.getAngle(this.state.start_x,this.state.start_y,this.state.x,this.state.y)
             
             if(this.state.x < 0 || this.state.x > window.innerWidth){
                 this.onEnd(e);
             }
 
-            if(dist < 0){
+            if(dist < 0){//move right
                 this.setState({
                     toBound: false
                 });
                 this.onEnd(e);
             }
 
-            if(dist < this.props.DRAG_DIST ){ 
+            if(dist < this.props.DRAG_DIST){ 
                 if(this.state.toBound) return; 
-                e.currentTarget.style.transform = `translateX(-${Math.abs(dist)}px)`;
+                if((angle <= 180 && angle >= 135) ||(angle >= -180 && angle <= -135)){
+                    e.currentTarget.style.transform = `translateX(-${Math.abs(dist)}px)`;
+                }
             }else{
                 this.setState({
                     toBound: true
                 })
             }
         }
-        //e.preventDefault();
+        e.preventDefault();
     }
 
     onEnd(e){
