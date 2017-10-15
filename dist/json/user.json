@@ -1,5 +1,5 @@
-module.exports = {
-    item:[
+{
+    "item":[
         {
         	"id":1,
             "name":"Allen Hawkins",

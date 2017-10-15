@@ -47,6 +47,10 @@ class Home extends React.Component{
                         {
                             this.props.match.path === '/liked'?
                             <MailList mailList={this.props.mailData.filter((item) =>  item.isLike === true )} state={this.props.match.path}/>
+                            :this.props.match.path === '/sent'?
+                            <MailList mailList={this.props.sendData} canEdit={false} state={this.props.match.path}/>
+                            :this.props.match.path === '/trash'?
+                            <MailList mailList={this.props.trashData} canEdit={false} state={this.props.match.path}/>
                             :<MailList mailList={this.props.mailData} setScrollFn={this.setScrollFn.bind(this)} state={this.props.match.path}/>
                         }
                     </div>
@@ -61,7 +65,9 @@ class Home extends React.Component{
 
 function mapStateToProps(state){
     return{
-        mailData: state.mailData
+        mailData: state.mailData,
+        sendData: state.sendData,
+        trashData: state.trashData
     }
 }
 

@@ -51,8 +51,7 @@ module.exports = {
 			},
 			{
 				test: /\.json$/,
-				loader: 'json-loader',
-				exclude: /node_modules/
+				use: 'json-loader'
 			},
 			{
 				test: /\.(woff|woff2|svg|ttf|eot)$/,

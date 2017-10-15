@@ -2,22 +2,14 @@ import 'es6-promise'
 import 'whatwg-fetch'
 
 export function getMailData(){
-    const res = get('/api/mail');
-    return res;
-}
-
-export function getMailDetail(id){
-    const res = get('/api/mail/detail',id);
+    //const res = get('/api/mail');
+    const res = get('/json/mail.json');
     return res;
 }
 
 export function getUserData(){
-    const res = get('/api/user');
-    return res;
-}
-
-export function getUserDetail(){
-    const res = get('/api/user/detail');
+    //const res = get('/api/user');
+    const res = get('/json/user.json');
     return res;
 }
 

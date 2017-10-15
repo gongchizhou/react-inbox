@@ -21,7 +21,7 @@ module.exports = {
 	output:{
         path: __dirname + '/dist',
 		filename: '[name].[chunkhash:8].js',
-		publicPath: ''
+		publicPath: '/'
 	},
 
     resolve:{
@@ -70,8 +70,7 @@ module.exports = {
 			},
 			{
 				test: /\.json$/,
-				loader: 'json-loader',
-				exclude: /node_modules/
+				use: 'json-loader'
 			},
 			{
 				test: /\.(woff|woff2|svg|ttf|eot)$/,
