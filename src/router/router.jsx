@@ -18,7 +18,7 @@ class AppRouter extends React.Component{
         return(
             <BrowserRouter>
                 <Switch>
-                    <Route exact path='/' component={Home}/>
+                    <Route path='/' component={Home}/>
                     <Route path='/liked' component={Home}/>
                     <Route path='/sent' component={Home}/>
                     <Route path='/trash' component={Home}/>
