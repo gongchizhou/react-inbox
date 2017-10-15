@@ -411,7 +411,7 @@ i {
       width: 54px;
       height: 54px;
       margin-right: 20px;
-      background-image: url(/images/31d704bc6f4f29405fc0e5cde8658b7a.jpg);
+      background-image: url(images/31d704bc6f4f29405fc0e5cde8658b7a.jpg);
       background-size: cover;
       background-position: center;
       background-color: #fff;
@@ -831,9 +831,9 @@ i {
   font-family: 'Material Icons';
   font-style: normal;
   font-weight: 400;
-  src: url(/fonts/e79bfd88537def476913f3ed52f4f4b3.eot);
+  src: url(fonts/e79bfd88537def476913f3ed52f4f4b3.eot);
   /* For IE6-8 */
-  src: local("Material Icons"), local("MaterialIcons-Regular"), url(/fonts/570eb83859dc23dd0eec423a49e147fe.woff2) format("woff2"), url(/fonts/012cf6a10129e2275d79d6adac7f3b02.woff) format("woff"), url(/fonts/a37b0c01c0baf1888ca812cc0508f6e2.ttf) format("truetype"); }
+  src: local("Material Icons"), local("MaterialIcons-Regular"), url(fonts/570eb83859dc23dd0eec423a49e147fe.woff2) format("woff2"), url(fonts/012cf6a10129e2275d79d6adac7f3b02.woff) format("woff"), url(fonts/a37b0c01c0baf1888ca812cc0508f6e2.ttf) format("truetype"); }
 
 .material-icons {
   font-family: 'Material Icons';
