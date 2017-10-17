@@ -45,11 +45,11 @@ class Home extends React.Component{
                     <div className="scroll-wrap" onScroll={this.scrollHandle.bind(this)}>
                         <HomeHeader showNav={this.showNav.bind(this)}/>
                         {
-                            this.props.match.path === '/liked'?
+                            this.props.match.path.indexOf('liked')>-1?
                             <MailList mailList={this.props.mailData.filter((item) =>  item.isLike === true )} state={this.props.match.path}/>
-                            :this.props.match.path === '/sent'?
+                            :this.props.match.path.indexOf('sent')>-1?
                             <MailList mailList={this.props.sendData} canEdit={false} state={this.props.match.path}/>
-                            :this.props.match.path === '/trash'?
+                            :this.props.match.path.indexOf('trash')>-1?
                             <MailList mailList={this.props.trashData} canEdit={false} state={this.props.match.path}/>
                             :<MailList mailList={this.props.mailData} setScrollFn={this.setScrollFn.bind(this)} state={this.props.match.path}/>
                         }
