@@ -1,7 +1,7 @@
 import React from 'react'
-import {BrowserRouter,Route,Switch} from 'react-router-dom'
-import { CSSTransitionGroup } from 'react-transition-group'
+import {HashRouter,Route,Switch,Redirect} from 'react-router-dom'
 
+import App from '../containers/App'
 import Home from '../containers/Home'
 import Compose from '../containers/Compose'
 import Contact from '../containers/Contact'
@@ -16,19 +16,19 @@ class AppRouter extends React.Component{
 
     render(){
         return(
-            <BrowserRouter>
-                <Switch>
-                    <Route exact path='/' component={Home}/>
-                    <Route path='/liked' component={Home}/>
-                    <Route path='/sent' component={Home}/>
-                    <Route path='/trash' component={Home}/>
-                    <Route path='/compose/:address?' component={Compose}/>
-                    <Route path='/contact' component={Contact}/>
-                    <Route path='/content/:id' component={Content}/>
-                    <Route path='/userDetail/:id' component={UserDetail}/>	
-                    <Route path='/addUser' component={AddUser}/>
-                </Switch>
-            </BrowserRouter>
+            <HashRouter>
+                    <Switch>
+                        <Route exact path='/' component={Home}/>
+                        <Route path='/liked' component={Home}/>
+                        <Route path='/sent' component={Home}/>
+                        <Route path='/trash' component={Home}/>
+                        <Route path='/compose/:address?' component={Compose}/>
+                        <Route path='/contact' component={Contact}/>
+                        <Route path='/content/:id' component={Content}/>
+                        <Route path='/userDetail/:id' component={UserDetail}/>	
+                        <Route path='/addUser' component={AddUser}/>
+                    </Switch>
+            </HashRouter>
         )
     }
 }

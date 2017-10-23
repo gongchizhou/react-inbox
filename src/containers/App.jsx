@@ -6,6 +6,7 @@ import {bindActionCreators} from 'redux'
 import * as mailActionCreator from '../actions/mailAction'
 import * as userActionCreator from '../actions/userAction'
 import AppRouter from '../router/router'
+import Transition from 'react-transition-group/Transition';
 
 class App extends React.Component{
     constructor(props){
