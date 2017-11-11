@@ -1,0 +1,24 @@
+.switch-enter {
+    opacity: 0.01;
+  }
+ 
+.switch-enter.switch-enter-active {
+opacity: 1;
+transition: opacity 500ms ease-in;
+}
+
+.switch-exit {
+opacity: 1;
+}
+
+.switch-exit.switch-exit-active {
+opacity: 0.01;
+transition: opacity 300ms ease-in;
+}
+.fill{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}

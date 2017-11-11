@@ -73,7 +73,7 @@ class MailList extends React.Component{
                 {
                     this.props.mailList.length > 0?
                     this.props.mailList.map(function(item,index){
-                        return <MailItem key={index} item={item} canEdit={this.props.canEdit} state={this.props.state.slice(1)} asset={this.asset.bind(this)}/>
+                        return <MailItem key={index} item={item} canEdit={this.props.canEdit} state={this.props.state} asset={this.asset.bind(this)}/>
                     }.bind(this))
                     :<div className="empty mt0"><span>you don't have any email yet</span></div>
                 }

@@ -12,6 +12,7 @@ class Home extends React.Component{
         super(props);
         this.state = {
             showNav:false,
+            filter:null,
             scroll:{}
         }
     }
@@ -26,6 +27,12 @@ class Home extends React.Component{
         this.setState({
             showNav: false
         })
+    }
+
+    setPageState(state){
+        this.setState({
+            filter: state
+        }) 
     }
 
     scrollHandle(){
@@ -45,19 +52,19 @@ class Home extends React.Component{
                     <div className="scroll-wrap" onScroll={this.scrollHandle.bind(this)}>
                         <HomeHeader showNav={this.showNav.bind(this)}/>
                         {
-                            this.props.match.path.indexOf('liked')>-1?
-                            <MailList mailList={this.props.mailData.filter((item) =>  item.isLike === true )} state={this.props.match.path}/>
-                            :this.props.match.path.indexOf('sent')>-1?
-                            <MailList mailList={this.props.sendData} canEdit={false} state={this.props.match.path}/>
-                            :this.props.match.path.indexOf('trash')>-1?
-                            <MailList mailList={this.props.trashData} canEdit={false} state={this.props.match.path}/>
-                            :<MailList mailList={this.props.mailData} setScrollFn={this.setScrollFn.bind(this)} state={this.props.match.path}/>
+                            this.state.filter == 'liked'?
+                            <MailList mailList={this.props.mailData.filter((item) =>  item.isLike === true )} state={this.state.filter}/>
+                            :this.state.filter == 'sent'?
+                            <MailList mailList={this.props.sendData} canEdit={false} state={this.state.filter}/>
+                            :this.state.filter == 'trash'?
+                            <MailList mailList={this.props.trashData} canEdit={false} state={this.state.filter}/>
+                            :<MailList mailList={this.props.mailData} setScrollFn={this.setScrollFn.bind(this)} state={this.state.filter}/>
                         }
                     </div>
                     <ComposeBtn/>
                     { this.state.showNav?<div className="mask" onClick={this.hideNav.bind(this)}></div>: ''}
                 </div>
-                <Sider hideNav={this.hideNav.bind(this)}/>
+                <Sider hideNav={this.hideNav.bind(this)} setPageState={this.setPageState.bind(this)}/>
             </div>
         )
     }

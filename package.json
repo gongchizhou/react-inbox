@@ -16,6 +16,7 @@
     "react-redux": "^5.0.5",
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
+    "react-transition-group": "^2.2.1",
     "redux": "^3.5.2",
     "whatwg-fetch": "^2.0.3"
   },

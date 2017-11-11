@@ -11,13 +11,14 @@
                 font-size:18px;
                 line-height: 54px;
                 padding-left: 48px;
+                text-transform: capitalize;
             }
             .active{
-                background: rgba(255,255,255,.2);
+                background-color: rgba(255,255,255,.2);
                 box-shadow: inset 4px 0 0 0 #fff;
             }
             &:hover{
-                background: rgba(255,255,255,.2);
+                background-color: rgba(255,255,255,.2);
                 box-shadow: inset 4px 0 0 0 #fff;
             }
         }
